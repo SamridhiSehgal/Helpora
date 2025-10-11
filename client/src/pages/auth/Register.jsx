@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import './Register.css';
+const redirectToLogin = () => {
+    console.log("Redirecting to the Registration page...");
+    // In a real application, this would be navigate('/login');
+    alert("Simulating redirection to Login page.");
+};
 
 const Register = () => {
   // State to track the selected user type: 'victim' (Individual) or 'ngo' (Provider)
@@ -178,6 +183,11 @@ const Register = () => {
             Register as {userType === 'victim' ? 'Individual' : 'NGO'}
           </button>
         </form>
+        {/* Signup Link/Redirect */}
+        <p className="signup-link">
+          Already have an account? 
+          <a href="/login" onClick={redirectToLogin}> Login Here</a>
+        </p>
       </div>
     </div>
   );
