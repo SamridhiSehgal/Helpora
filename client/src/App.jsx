@@ -15,7 +15,9 @@ import FulfillmentTracker from './pages/ngo/FulfillmentTracker';
 import IncomingRequests from './pages/ngo/IncomingRequests';
 import NGODashboard from './pages/ngo/NGODashboard';
 import ResourceUpdate from './pages/ngo/ResourceUpdate';
-
+import NewRequest from './pages/victim/NewRequest';
+import VictimRequests from './pages/victim/VictimRequests';
+import RequestDetails from './components/RequestDetail';
 const App = () => {
   return (
     <div>
@@ -31,6 +33,9 @@ const App = () => {
           { <Route path='/victim/request-status' element={<RequestStatus />} /> }
           { <Route path='/victim/request-form' element={<RequestForm />} /> }
           { <Route path='/victim/chatbot' element={<Chatbot />} /> }
+          { <Route path='/victim/new-request' element={<NewRequest />} /> }
+          { <Route path='/victim/victim-request' element={<VictimRequests />} /> }
+          
           { <Route path='/ngo/dashboard' element={<NGODashboard />} /> }
           {<Route path='/ngo/incoming-requests' element={<IncomingRequests />} /> }
           { <Route path='/ngo/fulfillment-tracker' element={<FulfillmentTracker />} /> }
