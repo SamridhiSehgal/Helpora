@@ -1,0 +1,27 @@
+.how-it-works {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.step {
+  max-width: 300px;
+}
+
+.step-icon {
+  background-color: #3b82f6;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  margin: 0 auto 20px;
+}
