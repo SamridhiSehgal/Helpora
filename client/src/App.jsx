@@ -15,7 +15,7 @@ import FulfillmentTracker from './pages/ngo/FulfillmentTracker';
 import IncomingRequests from './pages/ngo/IncomingRequests';
 import NGODashboard from './pages/ngo/NGODashboard';
 import ResourceUpdate from './pages/ngo/ResourceUpdate';
-
+import Footer from './components/Footer/Footer';
 const App = () => {
   return (
     <div>
@@ -36,6 +36,8 @@ const App = () => {
           { <Route path='/ngo/fulfillment-tracker' element={<FulfillmentTracker />} /> }
           { <Route path='/ngo/resource-update' element={<ResourceUpdate />} /> }
         </Routes>
+         <Footer />
+      <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'></div>
       </div>
     </div>
   );
