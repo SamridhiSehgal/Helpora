@@ -12,7 +12,7 @@ import NGODashboard from './pages/ngo/NGODashboard';
 import IncomingRequests from './pages/ngo/IncomingRequests';
 import FulfillmentTracker from './pages/ngo/FulfillmentTracker';
 import ResourceUpdate from './pages/ngo/ResourceUpdate';
-
+import Footer from './components/Footer/Footer';
 const App = () => {
   // Mock victim data - replace with actual authentication
   const victim = {
@@ -44,6 +44,8 @@ const App = () => {
           <Route path='/ngo/fulfillment-tracker' element={<FulfillmentTracker />} />
           <Route path='/ngo/resource-update' element={<ResourceUpdate />} />
         </Routes>
+         <Footer />
+      <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'></div>
       </div>
     </div>
   );
