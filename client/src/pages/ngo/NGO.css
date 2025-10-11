@@ -1,0 +1,510 @@
+/* ------------------------------------------- */
+/* 1. Global Setup and Fixed Element Clearance */
+/* ------------------------------------------- */
+.ngo-container {
+    /* Desktop Layout: Use Grid to define Sidebar and Main Content areas */
+    display: grid;
+    /* FIX: Reduced sidebar width to 240px to give 20px more space to the 1fr content area */
+    grid-template-columns: 240px 1fr; 
+    max-width: 1400px; 
+    margin: 0 auto;
+    gap: 30px; 
+    
+    /* Pushes content down past the fixed navbar. 
+       Note: 80px is used here, assuming the navbar is ~50px tall plus a 30px buffer. */
+    padding-top: 80px; 
+    padding-bottom: 50px; 
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5; 
+}
+
+/* ------------------------------------------- */
+/* 2. Sidebar Navigation (Left Panel) - ALIGNMENT ENHANCED */
+/* ------------------------------------------- */
+.sidebar {
+    background-color: #ffffff;
+    padding: 20px 0; 
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); 
+    height: fit-content; 
+    /* IMPORTANT: Align sticky position with the clearance padding */
+    position: sticky; 
+    top: 90px; /* Slightly more than the container's top padding (80px) */
+}
+
+.sidebar h3 {
+    color: #16a34a;
+    margin: 0 20px 25px 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef; 
+    padding-bottom: 15px;
+}
+
+.nav-link-list {
+    list-style: none;
+    padding: 0 10px; 
+    margin: 0;
+}
+
+.nav-link-list li {
+    margin-bottom: 4px; 
+}
+
+.nav-link-list a {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 6px; 
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.nav-link-list a:hover {
+    background-color: #f1f4f8; 
+    color: #007bff;
+}
+
+.nav-link-list a.active {
+    background-color: #16a34a; 
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(22, 163, 74, 0.25);
+    transform: translateX(2px); 
+}
+
+/* ------------------------------------------- */
+/* 3. Main Content Area (Right Panel) - ALIGNMENT ENHANCED */
+/* ------------------------------------------- */
+.main-content-area {
+    /* Ensures content area respects grid sizing and flows correctly */
+    width: 100%; 
+    padding: 0; /* Removing conflicting padding */
+    transition: all 0.3s ease-in-out;
+}
+
+/* ------------------------------------------- */
+/* 4. Dashboard Header and Stats (NGODashboard) */
+/* ------------------------------------------- */
+.ngo-header {
+    background-color: #ffffff; 
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border-left: 6px solid #16a34a; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.ngo-header h1 {
+    font-size: 2.4rem;
+    color: #16a34a;
+    margin: 0 0 5px 0;
+}
+.ngo-header p {
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+    border-bottom: 5px solid #007bff; 
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card h3 {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.stat-card.pending { border-bottom-color: #ffc107; } 
+.stat-card.accepted { border-bottom-color: #28a745; } 
+
+.stat-value {
+    font-size: 3rem;
+    font-weight: 800; 
+    color: #333;
+    margin: 0;
+}
+
+/* Common Button for Navigation */
+.primary-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+.primary-btn:hover { background-color: #0056b3; transform: translateY(-1px); }
+
+/* ------------------------------------------- */
+/* 5. Components Styling (Requests, Tracker, Resources) */
+/* ------------------------------------------- */
+
+/* --- Requests Table (IncomingRequests) --- */
+.request-table-wrapper {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; 
+    margin-bottom: 30px;
+    border: 1px solid #e9ecef; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 700px; 
+}
+
+thead th {
+    background-color: #007bff; 
+    color: white;
+    padding: 14px 18px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #f1f1f1;
+    transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fa; 
+}
+
+tbody td {
+    padding: 12px 18px;
+    vertical-align: middle;
+    color: #495057;
+}
+
+/* Status Tags */
+.status-tag {
+    padding: 6px 10px;
+    border-radius: 20px; 
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-block;
+}
+.priority-urgent { font-weight: bold; color: #dc2626; } 
+.status-accepted { background-color: #d1fae5; color: #065f46; border: 1px solid #28a745; } 
+.status-pending { background-color: #fff3e0; color: #ff9800; border: 1px solid #ffc107; } 
+.status-declined { background-color: #fdeaea; color: #dc3545; border: 1px solid #dc3545; }
+
+/* Action Buttons (Accept/Decline) */
+.action-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+    min-width: 90px;
+}
+.action-btn.accept { 
+    background-color: #28a745; 
+    color: white; 
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+.action-btn.decline { 
+    background-color: #dc3545; 
+    color: white; 
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+.action-btn.accept:hover { background-color: #1e7e34; transform: translateY(-1px); }
+.action-btn.decline:hover { background-color: #c82333; transform: translateY(-1px); }
+
+/* --- Fulfillment Tracker Styling --- */
+.tracker-card, .resource-update-form {
+    background-color: #fff;
+    /* Increased padding to make the card feel less cramped */
+    padding: 40px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    /* Ensuring the card fills the available 1fr width of the grid */
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.tracker-card h2, .resource-update-form h2 {
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    border-bottom: 1px solid #e9ecef; 
+    padding-bottom: 15px;
+}
+
+.tracker-info {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #ced4da; 
+    padding-left: 0; 
+    padding-right: 0; 
+    text-align: left; 
+}
+
+.tracker-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 40px 0;
+    position: relative;
+    /* FIX: Remove horizontal padding here and handle space via inner elements */
+    padding: 0; 
+}
+
+/* Make connecting line thicker and centered */
+.tracker-progress::before {
+    content: '';
+    position: absolute;
+    top: 17px; 
+    /* FIX: Adjusted values to ensure the line starts/ends closer to the center of the steps */
+    left: 4%; 
+    right: 4%;
+    height: 6px; 
+    background-color: #e9ecef;
+    z-index: 0;
+    border-radius: 3px;
+}
+
+.stage-step {
+    /* FIX: Set flex: 1 to ensure equal distribution across the entire available width */
+    flex: 1; 
+    padding: 0 5px; /* Minimal internal padding */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    font-size: 0.9rem; 
+    color: #6c757d;
+}
+
+.stage-circle {
+    width: 34px; 
+    height: 34px;
+    background-color: #ced4da;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    line-height: 34px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 4px solid #fff; 
+    transition: all 0.4s ease;
+    box-shadow: 0 0 0 1px #ced4da;
+}
+
+.stage-step.completed .stage-circle {
+    background-color: #28a745;
+    box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.3);
+}
+
+.stage-step-connector {
+    /* Used for coloring the line between steps in JS */
+    display: none; 
+}
+
+.current-status h3 {
+    font-size: 1.3rem;
+    color: #333;
+}
+.current-status p {
+    color: #6c757d;
+}
+
+
+/* --- Resource Update Form --- */
+.resource-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.resource-item:last-child {
+    border-bottom: none;
+}
+
+.resource-item label {
+    font-weight: 500;
+    color: #333;
+    flex-grow: 1;
+    font-size: 1.05rem;
+}
+
+.resource-item input {
+    width: 120px; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-align: right;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.resource-item input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15); 
+    outline: none;
+}
+
+.success-message { color: #28a745; margin-top: 20px; font-weight: 700; text-align: center;}
+
+
+/* ------------------------------------------- */
+/* 6. RESPONSIVENESS (Sidebar to Stack) - ALIGNMENT ENHANCED */
+/* ------------------------------------------- */
+
+/* Tablet/Mobile Layout: Stack Sidebar above Content */
+@media (max-width: 768px) {
+    .ngo-container {
+        /* Single column layout for better mobile flow */
+        grid-template-columns: 1fr; 
+        gap: 25px; 
+        
+        /* Ensure top/bottom clearance is consistent */
+        padding-top: 60px; /* Adjusted to 60px for better mobile consistency */
+        padding-bottom: 50px; 
+        min-height: auto;
+    }
+    
+    .sidebar {
+        position: static; 
+        width: 100%;
+        top: auto;
+        padding: 15px 0; 
+        /* Sidebar header for mobile (if needed, or center the nav links) */
+        
+        /* Ensure horizontal scroll works well */
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .sidebar h3 {
+        display: none; /* Hide static header on small screen to save vertical space */
+    }
+    
+    /* Navigation links become horizontal scrollable buttons */
+    .nav-link-list {
+        display: flex;
+        overflow-x: auto; 
+        padding-bottom: 10px; 
+        justify-content: flex-start; /* Align links to the start */
+    }
+
+    .nav-link-list li {
+        margin-right: 8px;
+        flex-shrink: 0; 
+    }
+
+    .nav-link-list a {
+        padding: 10px 18px;
+        font-size: 0.95rem;
+    }
+
+    /* Progress bar stacking on mobile */
+    .tracker-progress {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        margin: 20px 0;
+    }
+    
+    .tracker-progress::before {
+        display: none; 
+    }
+    
+    .stage-step {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .stage-step .stage-circle {
+        margin: 0 15px 0 0;
+    }
+}
+
+/* Phone Layout (Below 480px) */
+@media (max-width: 480px) {
+    .ngo-container {
+        padding: 60px 15px 50px 15px; 
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    .stat-value {
+        font-size: 2.5rem;
+    }
+
+    /* Action buttons stack vertically on very small screens */
+    table tbody td:last-child {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .action-btn {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    /* Resource Update Form Stacking */
+    .resource-update-form, .tracker-card {
+        padding: 50px; /* Reduce card padding on small screens */
+    }
+    
+    .resource-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .resource-item label {
+        margin-bottom: 5px;
+    }
+    .resource-item input {
+        width: 100%;
+        margin-top: 5px;
+        text-align: left;
+    }
+}
