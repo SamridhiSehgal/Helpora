@@ -1,0 +1,11 @@
+import express from "express";
+import{loginNgo,registerNgo,loginVictim,registerVictim}from '../controllers/auth.controller.js';
+const ngoRouter=express.Router();
+const victimRouter=express.Router();
+ngoRouter.post('/login',loginNgo);
+ngoRouter.post('/register',registerNgo);
+victimRouter.post('/login',loginVictim);
+victimRouter.post('/register',registerVictim);
+export{ngoRouter,victimRouter};
+const app=express();
+const port=4000;
