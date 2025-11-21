@@ -1,0 +1,197 @@
+/* === Auth Page Wrapper === */
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  padding: 2rem;
+}
+
+/* === Auth Container (the card) === */
+.auth-container {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  min-height: 600px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+/* === Left Panel (Branding & Info) === */
+.auth-panel {
+  flex: 1;
+  padding: 4rem 2.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, var(--helpora-secondary), var(--helpora-primary));
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-panel::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  filter: blur(30px);
+}
+
+.auth-panel h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  z-index: 1;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.auth-panel p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  z-index: 1;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+/* === Right Panel (Form) === */
+.auth-form-container {
+  flex: 1;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* === Form Title === */
+.auth-form-container h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--helpora-dark);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* === Input Fields === */
+.auth-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: var(--helpora-text);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--helpora-secondary);
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.3);
+}
+
+/* === Submit Button === */
+.auth-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--helpora-primary), var(--helpora-secondary));
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -10px rgba(255, 107, 107, 0.5);
+}
+
+.auth-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* === Link to switch between Login/Register === */
+.auth-switch-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.auth-switch-link a {
+  color: var(--helpora-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.auth-switch-link a:hover {
+  color: var(--helpora-secondary);
+  text-decoration: underline;
+}
+
+/* === Error/Success Messages === */
+.auth-message {
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.auth-error {
+  background-color: rgba(255, 107, 107, 0.1);
+  color: #D8000C;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.auth-success {
+  background-color: rgba(78, 205, 196, 0.1);
+  color: #005249;
+  border: 1px solid rgba(78, 205, 196, 0.3);
+}
+
+/* Keyframes for animations */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

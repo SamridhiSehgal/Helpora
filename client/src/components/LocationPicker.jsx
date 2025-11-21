@@ -1,77 +1,60 @@
-import React, { useState } from "react";
+// src/components/LocationPicker.jsx
+import React, { useState } from 'react';
+import { MapPin, Loader } from 'lucide-react';
 
-export default function LocationPicker({ value, onChange }) {
-  const [lat, setLat] = useState(value?.lat || "");
-  const [lng, setLng] = useState(value?.lng || "");
+const LocationPicker = ({ formData, setFormData }) => {
+    const [isFetching, setIsFetching] = useState(false);
 
-  function apply() {
-    const la = parseFloat(lat);
-    const lo = parseFloat(lng);
-    if (isNaN(la) || isNaN(lo)) return alert("Please enter valid coordinates");
-    onChange({ lat: la, lng: lo });
-  }
+    const handleLocationFetch = () => {
+        setIsFetching(true);
+        // Simulate fetching location
+        setTimeout(() => {
+            // In a real app, you'd use navigator.geolocation.getCurrentPosition
+            const mockLocation = {
+                latitude: 28.6139,
+                longitude: 77.2090,
+            };
+            setFormData(prev => ({
+                ...prev,
+                latitude: mockLocation.latitude,
+                longitude: mockLocation.longitude,
+            }));
+            setIsFetching(false);
+        }, 1000);
+    };
 
-  return (
-    <div
-      style={{
-        border: "1px solid #ddd",
-        padding: "15px",
-        borderRadius: "8px",
-        background: "#f9f9f9",
-        marginTop: "6px",
-      }}
-    >
-      <div style={{ marginBottom: 8 }}>
-        <label>Latitude:</label>
-        <input
-          type="number"
-          value={lat}
-          onChange={(e) => setLat(e.target.value)}
-          placeholder="e.g. 28.7041"
-          style={{
-            marginLeft: "8px",
-            padding: "6px",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-            width: "50%",
-          }}
-        />
-      </div>
+    return (
+        <div className="space-y-4 border p-4 rounded-lg bg-gray-50">
+            <h3 className="text-lg font-semibold text-gray-700">Step 2: Location</h3>
+            <div className="relative h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                <p className="text-gray-500">-- Interactive Map Placeholder --</p>
+                {formData.latitude && formData.longitude && (
+                    <div className="absolute" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                        <MapPin size={32} className="text-helpora-red" />
+                    </div>
+                )}
+            </div>
+            <button
+                type="button"
+                onClick={handleLocationFetch}
+                disabled={isFetching}
+                className="w-full flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+                {isFetching ? <Loader size={20} className="animate-spin mr-2" /> : <MapPin size={20} className="mr-2" />}
+                {isFetching ? 'Fetching Location...' : 'Get Current Location (Mock)'}
+            </button>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="relative">
+                    <MapPin size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input type="number" name="longitude" placeholder="Longitude *" value={formData.longitude} readOnly className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 pl-10" />
+                </div>
+                <div className="relative">
+                    <MapPin size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input type="number" name="latitude" placeholder="Latitude *" value={formData.latitude} readOnly className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 pl-10" />
+                </div>
+            </div>
+        </div>
+    );
+};
 
-      <div style={{ marginBottom: 8 }}>
-        <label>Longitude:</label>
-        <input
-          type="number"
-          value={lng}
-          onChange={(e) => setLng(e.target.value)}
-          placeholder="e.g. 77.1025"
-          style={{
-            marginLeft: "8px",
-            padding: "6px",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-            width: "50%",
-          }}
-        />
-      </div>
-
-      <button
-        onClick={apply}
-        style={{
-          background: "#27ae60",
-          color: "#fff",
-          border: "none",
-          borderRadius: "6px",
-          padding: "8px 14px",
-          cursor: "pointer",
-        }}
-      >
-        Set Location
-      </button>
-
-      <p style={{ marginTop: 8, fontSize: 13, color: "#666" }}>
-        Tip: Replace this with Google Maps or Leaflet for interactive picking.
-      </p>
-    </div>
-  );
-}
+export default LocationPicker;

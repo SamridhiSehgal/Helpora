@@ -1,33 +1,263 @@
-/* --- UNIVERSAL RESET --- */
+/* --------------------------------------------------------------------------
+ * 1. GOOGLE FONT IMPORTS
+ * --------------------------------------------------------------------------
+ */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&family=Poppins:wght@400;600;700&display=swap');
+@import url('./pages/auth/AuthStyles.css');
+
+/* --------------------------------------------------------------------------
+ * 2. TAILWIND DIRECTIVES (Required for any existing Tailwind classes)
+ * --------------------------------------------------------------------------
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------------------------------------------------
+ * 3. GLOBAL STYLES, COLORS, AND CREATIVE BACKGROUND
+ * --------------------------------------------------------------------------
+ */
+
+/* Define CSS Variables for custom colors */
+:root {
+  --helpora-primary: #FF6B6B;      /* Vibrant Red */
+  --helpora-secondary: #4ECDC4;    /* Teal */
+  --helpora-accent: #FFD700;       /* Gold/Yellow */
+  --helpora-dark: #2C3E50;         /* Dark Text */
+  --helpora-text: #34495E;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-    background-color: #f4f7f6;
+    font-family: 'Poppins', sans-serif;
+    color: var(--helpora-text);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
-/* --- CRITICAL: GLOBAL CONTENT CLEARANCE FIX --- */
-/* This padding ensures ALL page content clears the fixed 50px Navbar.
-    We apply 50px (navbar height) + 10px (buffer) = 60px padding to the top of the body.
-*/
-.app-content-wrapper {
-    /* If you wrap all routes/pages in a class like 'app-content-wrapper' */
-    padding-top: 60px; 
-    min-height: calc(100vh - 50px); /* Adjust min-height to account for navbar */
+/* ------------------- CREATIVE BACKGROUND STYLES & ANIMATION ------------------- */
+.creative-background {
+    /* Base gradient background */
+    background: linear-gradient(135deg, #FFDDE1, #E0F7FA, #FFDDE1);
+    /* Increase size for the flow animation */
+    background-size: 400% 400%; 
+    animation: flowBg 20s ease infinite alternate; /* Apply animation */
+    position: relative;
+    overflow: hidden; 
 }
 
-/* If you cannot use a wrapper class, apply it directly to the <body> element: */
-body {
-    padding-top: 60px; 
-}
-
-
-/* --- Responsive Adjustments for Main Content --- */
-/* For pages with sidebars or complex layouts */
-@media (max-width: 768px) {
-    .app-content-wrapper {
-        padding-left: 15px;
-        padding-right: 15px;
+/* Keyframes for background movement */
+@keyframes flowBg {
+    0% {
+        background-position: 0% 50%;
     }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Add a subtle patterned overlay for texture */
+.creative-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Radial gradient to focus center content */
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+/* ---------------------------------------------------------------------- */
+
+
+/* --- TITLE STYLES --- */
+.main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--helpora-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-title svg {
+    color: var(--helpora-primary);
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* --- BUTTON STYLES --- */
+.landing-button-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    width: 320px;
+    height: 160px;
+    border-radius: 1.5rem; 
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.4s;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.landing-button-link:hover {
+    transform: scale(1.08); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Specific button colors using CSS variables */
+.btn-red {
+    background: linear-gradient(135deg, var(--helpora-primary), #d83d3d);
+}
+.btn-teal {
+    background: linear-gradient(135deg, var(--helpora-secondary), #3aa098);
+}
+.btn-gold {
+    background: linear-gradient(135deg, var(--helpora-accent), #e6c100);
+    color: var(--helpora-dark);
+}
+
+/* --------------------------------------------------------------------------
+ * 4. NEW STYLES FOR ENHANCED LANDING PAGE
+ * --------------------------------------------------------------------------
+ */
+
+/* Animated shapes in the background */
+.floating-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.shape {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(78, 205, 196, 0.2);
+    animation: float 25s linear infinite;
+    bottom: -150px;
+}
+
+.shape:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+.shape:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.shape:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.shape:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.shape:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+/* Animated text for the main title */
+.animated-text {
+    background: linear-gradient(90deg, var(--helpora-dark), var(--helpora-secondary), var(--helpora-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: text-shine 5s linear infinite;
+}
+
+@keyframes text-shine {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Improved button hover effect */
+.landing-button-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+    z-index: 0;
+}
+
+.landing-button-link:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+/* "How it Works" section styling */
+.how-it-works-step {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.how-it-works-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
